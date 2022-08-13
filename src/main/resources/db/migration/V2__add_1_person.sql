@@ -1,0 +1,1 @@
+insert into person (id, email, name, patronymic, surname, telephone) VALUES (1, '1234@mail.com', 'ivan', 'ivanovich', 'ivanov', 12345678);
