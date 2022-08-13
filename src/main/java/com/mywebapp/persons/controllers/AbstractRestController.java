@@ -2,11 +2,13 @@ package com.mywebapp.persons.controllers;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractRestController<T, R extends JpaRepository<T, ?>> {
@@ -19,7 +21,11 @@ public abstract class AbstractRestController<T, R extends JpaRepository<T, ?>> {
     @ApiOperation("получение списка элементов")
     @GetMapping
     public List<T> getAll(@PageableDefault Pageable pageable ){
-        return repo.findAll(pageable).getContent();
+        if (repo.findAll(pageable) == null){
+            return new ArrayList<T>();
+        } else {
+            return repo.findAll(pageable).getContent();
+        }
     }
 
     @ApiOperation("получение одного элемента")
