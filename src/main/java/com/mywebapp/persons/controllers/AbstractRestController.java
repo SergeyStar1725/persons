@@ -14,6 +14,10 @@ import java.util.List;
 public abstract class AbstractRestController<T, R extends JpaRepository<T, ?>> {
     protected R repo;
 
+    public void setRepo(R repo){
+        this.repo = repo;
+    }
+
     public AbstractRestController(R repo) {
         this.repo = repo;
     }
